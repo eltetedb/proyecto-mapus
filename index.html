@@ -216,7 +216,7 @@ Es por lo que creo que pueden ser unos puntos interesantes en los cuales aparte 
 								Son unos espacios perfectos para conseguir materiales que puedan servir a la realización de los productos. Algunas asociaciones como Gats de Sant Boi ya trabajan en colaboración con los puntos verde.
 								</p>	
 
-								<h4>Centros de fabricación digital y parpinteros</h4>
+								<h4>Centros de fabricación digital y carpinteros</h4>
 								<span class="image main">
 									<img src="images/cartografias/thumbs/CentrosdefabricaciodigitalycarpinterosThumbs.jpg" alt="" usemap="#Map5" />
 									<map name="Map5" id="Map5">
@@ -258,7 +258,7 @@ Es por lo que creo que pueden ser unos puntos interesantes en los cuales aparte 
 
 								<span class="image main"><img src="images/crear/segunda_materiales.JPG" alt="" /></span>
 
-								<p>A continuación encontrareis el coste de cada producto, el material necesario para su realización y videos tutoriales.</p>
+								<p>A continuación encontrarÉis el coste de cada producto, el material necesario para su realización y videos tutoriales.</p>
 
 
 								<h2>T1</h2>
@@ -730,19 +730,22 @@ Este comedero puede estar fijado en cualquier superficie vertical y podrá conte
 							<article id="blog">
 								<h2 class="major">Blog</h2>
 								
-								<p>Blog...</p>
+								<p>Espacio para compartir ideas, dudas, fotos y novedades!</p>
 									
 								<div id="zonaComentarios">
 									<hr />
 									<section id="comentario1">			
-										<h4>Comentario 1 <code>25/05/2017, 13:56</code></h4>
-										<blockquote>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan faucibus. Vestibulum ante ipsum primis in faucibus lorem ipsum dolor sit amet nullam adipiscing eu felis.</blockquote>									
+										<h4>Gatuari <code>25/05/2017, 13:56</code></h4>
+										<blockquote>
+											Super taller realizado en nuestras instalaciones! Nuestros gatos adoran el T2! Gracias!
+										</blockquote>									
 										<hr />
 									</section>
 									<section id="comentario2">
-
-										<h4>Comentario 2 <code>25/05/2017, 13:56</code></h4>
-										<blockquote>Fringilla nisl. Donec accumsan interdum nisi, quis tincidunt felis sagittis eget tempus euismod. Vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing accumsan faucibus. Vestibulum ante ipsum primis in faucibus lorem ipsum dolor sit amet nullam adipiscing eu felis.</blockquote>									
+										<h4>Emma <code>28/05/2017, 09:33</code></h4>
+										<blockquote>
+											Genial! Mis gatitos quieren el T2, es guapisimo! Avisame cuando produzcas, que quiero uno.
+										</blockquote>			
 										<hr />
 									</section>
 								</div>
@@ -829,17 +832,27 @@ Este comedero puede estar fijado en cualquier superficie vertical y podrá conte
 					});	
 
 					$("#cmdComentario").click(function(e){
-						// TODO sanizar los input
 						var dateNow = moment().format('DD/MM/YYYY, HH:mm:ss');
-						var nuevoComentario = 	"<section id=\"comentario\" " + (++nComents) + " >" +
-												"<h4>" + $('#name').val() + 
-												" <code>" + dateNow + "</code></h4>" + 										
-												"<blockquote>" + $('#message').val() + "</blockquote><hr /></section>";
+						var comment = sanitizeString($('#message').val());
+						var name 	= sanitizeString($('#name').val());
 
-						$('#zonaComentarios').append(nuevoComentario);
-							
+						if(comment.length > 0 && name.length > 0 && $('#demo-human').is(":checked")){
+							var nuevoComentario = 	"<section id=\"comentario\" " + (++nComents) + " >" +
+													"<h4>" + name + 
+													" <code>" + dateNow + "</code></h4>" + 										
+													"<blockquote>" + comment + "</blockquote><hr /></section>";
 
+							$('#zonaComentarios').append(nuevoComentario);
+						}	
+						$('#message').val("");
+						$('#name').val("");	
+						$('#demo-human').prop('checked', false); 
 					});
+
+					function sanitizeString(str){
+					    str = str.replace(/[^a-z0-9áéíóúñü \.,_-]/gim,"");
+					    return str.trim();
+					}
 				});
 			</script>
 
